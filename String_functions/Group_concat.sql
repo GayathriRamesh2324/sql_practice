@@ -1,0 +1,29 @@
+# To list the products from different rows under one list
+  #Used Group_concat(joining values from different columns) instead of concat(joining values from different columns)
+
+Select sell_date,Count(DISTINCT product) num_sold,
+GROUP_CONCAT(DISTINCT product) products
+from Activities
+Group by sell_date
+ORDER BY sell_date
+
+Input: 
+Activities table:
++------------+------------+
+| sell_date  | product     |
++------------+------------+
+| 2020-05-30 | Headphone  |
+| 2020-06-01 | Pencil     |
+| 2020-06-02 | Mask       |
+| 2020-05-30 | Basketball |
+| 2020-06-01 | Bible      |
+| 2020-06-02 | Mask       |
+| 2020-05-30 | T-Shirt    |
++------------+------------+
+Output
+| sell_date  | num_sold | products                     |
+| ---------- | -------- | ---------------------------- |
+| 2020-05-30 | 3        | Basketball,Headphone,T-Shirt |
+| 2020-06-01 | 2        | Bible,Pencil                 |
+| 2020-06-02 | 1        | Mask                         |
++------------+------------+
