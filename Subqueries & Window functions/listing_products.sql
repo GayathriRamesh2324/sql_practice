@@ -6,7 +6,7 @@ With cte_unit as (
     from Products p
     LEFT JOIN Orders o
     ON p.product_id = o.product_id
-    where month(o.order_date) = 2 
+    where month(o.order_date) = 2 and year(o.order_date) = '2020'
     Group by p.product_name
 )
 Select product_name,unit
